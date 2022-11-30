@@ -161,7 +161,7 @@ section{
     bottom: 0; right: 0; left: 0;
     height: 18rem;
     background-size: 250rem 20rem;
-    background: url(../brouillon/image/cloud.png) repeat-x;
+    background: url(../ProjetWeb/image/cloud.png) repeat-x;
     animation: cloud 10s linear infinite;
 }
 
@@ -342,7 +342,7 @@ section{
     }
 }
 
-@media (max-width:768px){
+@media (max-width:849px){
     
     #menu-btn{
         display: initial;
