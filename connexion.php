@@ -3,6 +3,9 @@ session_start();
 
 $bdd = new PDO('mysql:host=localhost;dbname=espace_membre', 'root', '');
 
+include_once('cookieconnect.php');
+
+
 if(isset($_POST['formconnexion'])) {
     $mailconnect = htmlspecialchars($_POST['mailconnect']);
     $mdpconnect = sha1($_POST['mdpconnect']);
@@ -11,6 +14,11 @@ if(isset($_POST['formconnexion'])) {
         $requser->execute(array($mailconnect, $mdpconnect));
         $userexist = $requser->rowCount();
         if($userexist == 1) {
+            if(isset($_POST['rememberme'])){
+                setcookie('email',$mailconnect, time()+365*24*3600, null, null, false, true);
+                setcookie('password',$mdpconnect, time()+365*24*3600, null, null, false, true);
+
+            }
             $userinfo = $requser->fetch();
             $_SESSION['id'] = $userinfo['id'];
             $_SESSION['pseudo'] = $userinfo['pseudo'];
@@ -36,6 +44,8 @@ if(isset($_POST['formconnexion'])) {
     <form method="POST" action="">
         <input type="email" name="mailconnect" placeholder="Mail" />
         <input type="password" name="mdpconnect" placeholder="Mot de passe" />
+        <br /><br />
+        <input type="checkbox" name="rememberme" id="remembercheckbox" /><label for="remembercheckbox">Se souvenir de moi </label>
         <br /><br />
         <input type="submit" name="formconnexion" value="Se connecter !" />
     </form>

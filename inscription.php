@@ -35,8 +35,8 @@ if(isset($_POST['forminscription'])){
 
                             if ($mdp == $mdp2) {
 
-                                $insertmbr = $bdd->prepare("INSERT INTO membres (pseudo, mail, motdepasse) VALUES (?,?,?)");
-                                $insertmbr->execute(array($pseudo, $mail, $mdp));
+                                $insertmbr = $bdd->prepare("INSERT INTO membres (pseudo, mail, motdepasse, avatar) VALUES (?,?,?,?)");
+                                $insertmbr->execute(array($pseudo, $mail, $mdp, "default.jpeg"));
                                 $erreur = "Votre compte a bien été crée ! <a href=\"connexion.php\">Me connecter</a>";
                                 //header('Location: index.php');
 

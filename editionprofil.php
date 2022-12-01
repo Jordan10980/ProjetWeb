@@ -1,7 +1,14 @@
 <?php
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
 session_start();
 
 $bdd = new PDO('mysql:host=localhost;dbname=espace_membre', 'root', '');
+
+include_once('cookieconnect.php');
+
+
 if(isset($_SESSION['id'])) {
    $requser = $bdd->prepare("SELECT * FROM membres WHERE id = ?");
    $requser->execute(array($_SESSION['id']));
@@ -51,6 +58,33 @@ if(isset($_SESSION['id'])) {
          $msg = "Vos deux mdp ne correspondent pas !";
       }
    }
+
+    if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name'])) {
+        $tailleMax = 2097152;
+        $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+        if($_FILES['avatar']['size'] <= $tailleMax) {
+            $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+            if(in_array($extensionUpload, $extensionsValides)) {
+                $chemin = "membres/avatars/".$_SESSION['id'].".".$extensionUpload;
+                $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                if($resultat) {
+                    $updateavatar = $bdd->prepare('UPDATE membres SET avatar = :avatar WHERE id = :id');
+                    $updateavatar->execute(array(
+                        'avatar' => $_SESSION['id'].".".$extensionUpload,
+                        'id' => $_SESSION['id']
+                    ));
+                    header('Location: profil.php?id='.$_SESSION['id']);
+                } else {
+                    $msg = "Erreur durant l'importation de votre photo de profil";
+                }
+            } else {
+                $msg = "Votre photo de profil doit être au format jpg, jpeg, gif ou png";
+            }
+        } else {
+            $msg = "Votre photo de profil ne doit pas dépasser 2Mo";
+        }
+    }
+
 ?>
     <html>
     <head>
@@ -70,6 +104,7 @@ if(isset($_SESSION['id'])) {
                             <label>Pseudo :</label>
                         </td>
                         <td>
+                            <br />
                             <input type="text" name="newpseudo" placeholder="Pseudo" value="<?php echo $user['pseudo']; ?>" /><br /><br />
                         </td>
                     </tr>
@@ -80,6 +115,7 @@ if(isset($_SESSION['id'])) {
                             <label>Mail :</label>
                         </td>
                         <td>
+                            <br />
                             <input type="text" name="newmail" placeholder="Mail" value="<?php echo $user['mail']; ?>" /><br /><br />
                         </td>
                     </tr>
@@ -90,6 +126,7 @@ if(isset($_SESSION['id'])) {
                             <label>Mot de passe :</label>
                         </td>
                         <td>
+                            <br />
                             <input type="password" name="newmdp1" placeholder="Mot de passe"/><br /><br />
                         </td>
                     </tr>
@@ -100,9 +137,21 @@ if(isset($_SESSION['id'])) {
                             <label for="mdp2">Confirmation mot de passe :</label>
                         </td>
                         <td>
+                            <br />
                             <input type="password" name="newmdp2" placeholder="Confirmation du mot de passe" /><br /><br />
                         </td>
                     </tr>
+
+                    <tr>
+                        <td align="right">
+                            <label>Avatar :</label>
+                        </td>
+                        <td>
+                            <br />
+                            <input type="file" name="avatar" /><br /><br />
+                        </td>
+                    </tr>
+
 
                     <tr>
                         <td></td>
