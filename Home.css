@@ -328,7 +328,7 @@ section{
 
 
 
-@media (max-width:1116px){
+@media (max-width:1175px){
 
     html{
         font-size: 55%;
@@ -349,7 +349,7 @@ section{
 
 }
 
-@media (max-width:849px){
+@media (max-width:943px){
     
     #menu-btn{
         display: initial;

@@ -88,7 +88,7 @@ section{
     text-align: center;
     color: white;
     text-transform: none; 
-    padding-top: 14rem;
+    padding-top: 24rem;
     padding-bottom: 14rem;
 }
 .presite h3{
@@ -103,6 +103,62 @@ section{
     font-size: 2rem;
     line-height: 1.8;
 }
+
+.prequipe{
+    text-align: center;
+    color: white;
+    text-transform: none; 
+    padding-top: 14rem;
+    padding-bottom: 24rem;
+}
+.prequipe h3{
+    font-size: 5rem;
+    line-height: 1.8;
+    color:var(--main-color);
+    text-transform: none;
+}
+
+.prequipe p{
+    padding-top: 10rem;
+    font-size: 2rem;
+    line-height: 1.8;
+}
+
+.projet{
+    color: white;
+    text-transform: none; 
+    padding-top: 14rem;
+    padding-bottom: 14rem;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.projet h3{
+    font-size: 5rem;
+    line-height: 1.8;
+    color:var(--main-color);
+    text-transform: none;
+}
+
+.projet p{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    font-size: 2rem;
+    line-height: 1.8;
+}
+
+.projet .images{
+    flex: 50%;
+}
+
+.projet .images img{
+    border-radius: 3rem;
+}
+
+.projet .text{
+    flex: 50%;
+}
+
 
 /*footer*/
 
@@ -171,7 +227,7 @@ section{
 }
 
 
-@media (max-width:1116px){
+@media (max-width:1175px){
 
     html{
         font-size: 55%;
@@ -184,12 +240,16 @@ section{
     section{
         padding: 2rem;
     }
+    
+    .btn{
+        margin-bottom: 5rem;
+    }
 
 
 }
 
-@media (max-width:849px){
-
+@media (max-width:943px){
+    
     #menu-btn{
         display: initial;
     }
@@ -224,7 +284,17 @@ section{
         background: var(--bg);
     }
 
+    .home .content{
+        text-align: center;
+    }
+
+    .projet{
+        flex-direction: column;
+        
+    }
+
 }
+
 
 @media (max-width:400px){
 
@@ -232,3 +302,4 @@ section{
         font-size: 50%;
     }
 }
+
