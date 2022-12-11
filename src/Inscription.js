@@ -35,7 +35,7 @@ const Register=(props)=>{
         }
         console.log(sendData);
 
-        // axios.post('http://localhost:80/api/process-signup.php',sendData)
+        // axios.post('http://localhost/test/test.php',sendData)
         // .then((result)=>{
         //     if(result.data.Status === 'Invalid') {
         //    alert('Invalid User');
@@ -48,15 +48,16 @@ const Register=(props)=>{
                 
         // })
 
-        fetch( "http://localhost/test/test.php", {
+        fetch( "http://localhost:80/test/test.php", {
             method : "POST",
             body : JSON.stringify(sendData),
           }).then( function(response){
-            if(response.status === 200){
-                history('/dashboard');
-            }else{
-                alert('Invalid User');
-            }
+            console.lot(response.status);
+            // if(response.status === 200){
+            //     history('/dashboard');
+            // }else{
+            //     alert('Invalid User');
+            // }
                
         }).catch(function(error){
             console.error(error);
