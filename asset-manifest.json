@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ProjetWeb/static/css/main.2bf76d39.css",
+    "main.js": "/ProjetWeb/static/js/main.2281c968.js",
+    "static/js/787.25726df2.chunk.js": "/ProjetWeb/static/js/787.25726df2.chunk.js",
+    "static/media/avion.gif": "/ProjetWeb/static/media/avion.a85bea0142f2cf51366b.gif",
+    "static/media/avion.png": "/ProjetWeb/static/media/avion.c5fdc1541a2b606d1879.png",
+    "static/media/iut.jpeg": "/ProjetWeb/static/media/iut.8beee7a874baaa0f4315.jpeg",
+    "static/media/image1.jpeg": "/ProjetWeb/static/media/image1.da8cfca95cd327c4a5e4.jpeg",
+    "static/media/airplane.png": "/ProjetWeb/static/media/airplane.711146f2203888bc4459.png",
+    "static/media/cloud.png": "/ProjetWeb/static/media/cloud.c4590b35d58a709cfb70.png",
+    "static/media/logo.svg": "/ProjetWeb/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/ProjetWeb/index.html",
+    "main.2bf76d39.css.map": "/ProjetWeb/static/css/main.2bf76d39.css.map",
+    "main.2281c968.js.map": "/ProjetWeb/static/js/main.2281c968.js.map",
+    "787.25726df2.chunk.js.map": "/ProjetWeb/static/js/787.25726df2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2bf76d39.css",
+    "static/js/main.2281c968.js"
+  ]
+}
