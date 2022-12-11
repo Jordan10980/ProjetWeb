@@ -23,7 +23,7 @@ const Api=()=>{
         </header>
 
          <section className="contain">
-            <h3>API - notre map </h3>
+            <h3>API - notre map</h3>
         </section>
 
     <footer className="footer">
