@@ -406,6 +406,11 @@ section{
     html{
         font-size: 50%;
     }
+
+    .images img{
+        width: 300px;
+        height: 300px;
+    }
 }
 
 
