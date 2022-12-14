@@ -13,7 +13,7 @@ const Accueil=()=>{
 
         <header class="header">
 
-            <a href="" class="logo"><img src={airplane} alt=""/>JMS</a>
+            <a href="" class="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
             <nav class="navbar">
                 <Link to="/" class="nav-link">Accueil</Link>

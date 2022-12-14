@@ -8,7 +8,7 @@ const Connexion=()=>{
 
     <header className="header">
 
-        <a href="" className="logo"><img src={airplane} alt=""/>JMS</a>
+        <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
         <nav className="navbar">
             <Link to="/" className="nav-link">Accueil</Link>
