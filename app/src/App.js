@@ -8,38 +8,23 @@ import Inscription from './Inscription';
 import Contact from './Contact';
 import Apropos from './Apropos';
 import React, {useState, useEffect} from 'react';
-// import Radio from './components/Radio';
-// import Loading from './components/Loading';
-
-
 import {Radio} from "react-loader-spinner";
 
 
 function App() {
 
-  const [isLoading, setIsLoading] = useState(true);
-  
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      
-    }, 2040);
-
-  })
-
+    }, 2500);
+  }, [])
 
   
   
   return (
   <>
-  
-  {/* {isLoading==true?
-          <Loading/>:
-          <Radio/>
-        } */}
-   
-
-
     {
     isLoading?
 
@@ -51,14 +36,15 @@ function App() {
     timeout={3000} //3 secs
     />
     :
+ 
   
-  
-    
     <Router>
     <div className='container'>
+
       
+    
       <Routes>
-        <Route path="/" element={<Accueil/>}/>
+        <Route path="/ProjetWeb" element={<Accueil/>}/>
         <Route path="/connexion" element={<Connexion/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
         <Route path="/api" element={<Api/>}/>
@@ -67,9 +53,9 @@ function App() {
       </Routes>
     </div>
     </Router>
-
-}
-
+    
+    }
+    
     </>
 
   );

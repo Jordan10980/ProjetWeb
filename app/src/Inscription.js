@@ -74,7 +74,7 @@ const Register=(props)=>{
             <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
             <nav className="navbar">
-                <Link to="/" className="nav-link">Accueil</Link>
+                <Link to="/ProjetWeb" className="nav-link">Accueil</Link>
                 <Link to="/api" className="nav-link">Api</Link>
                 <Link to="/contact" className="nav-link">Contact</Link>
                 <Link to="/apropos" className="nav-link">A propos</Link>
@@ -137,14 +137,14 @@ const Register=(props)=>{
             <footer className="footer">
                 <div className="box-container">
 
-                    <div className="box">
-                        <h3>navigation</h3>
-                        <a href="Home.html"><i className="fas fa-arrow-right"></i>Accueil</a>
-                        <a href="API.html"><i className="fas fa-arrow-right"></i>API          </a>
-                        <a href="contact.html"><i className="fas fa-arrow-right"></i>Contact</a>
-                        <a href="apropos.html"><i className="fas fa-arrow-right"></i>A propos</a>
-                        <a href="Connexion.html">Se connecter</a>
-                    </div>
+                <div className="box">
+                <h3>navigation</h3>
+                <Link to="/ProjetWeb" className="fas fa-arrow-right">Accueil</Link>
+                <Link to="/api" className="fas fa-arrow-right">Api</Link>
+                <Link to="/contact" className="fas fa-arrow-right">Contact</Link>
+                <Link to="/apropos" className="fas fa-arrow-right">A propos</Link>
+                <Link to="/connexion" className="fas fa-arrow-right">Se connecter</Link>
+            </div>
 
                     <div className="box">
                         <h3>Contact</h3>

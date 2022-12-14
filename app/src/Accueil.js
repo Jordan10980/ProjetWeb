@@ -16,7 +16,7 @@ const Accueil=()=>{
             <a href="" class="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
             <nav class="navbar">
-                <Link to="/" class="nav-link">Accueil</Link>
+                <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
                 <Link to="/api" class="nav-link">Api</Link>
                 <Link to="/contact" class="nav-link">Contact</Link>
                 <Link to="/apropos" class="nav-link">A propos</Link>
@@ -78,7 +78,7 @@ const Accueil=()=>{
 
             <div className="box">
                 <h3>navigation</h3>
-                <Link to="/" className="fas fa-arrow-right">Accueil</Link>
+                <Link to="/ProjetWeb" className="fas fa-arrow-right">Accueil</Link>
                 <Link to="/api" className="fas fa-arrow-right">Api</Link>
                 <Link to="/contact" className="fas fa-arrow-right">Contact</Link>
                 <Link to="/apropos" className="fas fa-arrow-right">A propos</Link>
