@@ -18,23 +18,28 @@ function App() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 2020);
   }, [])
 
   
   
   return (
   <>
+  
+    
+  
     {
     isLoading?
-
-    <Radio 
+    <div className='loader'>
+      <h1>Flight Tracker</h1>
+    <Radio
     type="Hearts"
-    color="rgb(0, 153, 255)"
+    colors={['#FFFFFF','#FFFFFF', '#FFFFFF']}
     height={100}
     width={100}
     timeout={3000} //3 secs
     />
+     </div>
     :
  
   
@@ -55,6 +60,7 @@ function App() {
     </Router>
     
     }
+   
     
     </>
 
