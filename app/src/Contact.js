@@ -23,13 +23,39 @@ const Contact=()=>{
         </header>
 
         <section className="contain">
-            <h3>Contact</h3>
-            <br /><br /><br /><br /><br />
+        <h3>Contact</h3>
         </section>
 
-        <section className='test'>
-        
-        </section>
+        <section className="contact_form">
+            <form method="POST" action="php/contact.php">
+                
+                <div className="row">
+                    <div className="col-de-6"><input type="email" placeholder="Votre mail" id="mail" name="mail" className="form-control" required/>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-de-6"><input type="text" placeholder="Objet" id="objet" name="objet" className="form-control" required/>
+                    </div>
+                </div>
+
+                
+                <div className="row">
+                    <div className="col-de-6"><textarea  placeholder="Ecrivez un message ..." id="message" name="message" className="form-control" required/>
+                    </div>
+                </div>
+
+                <div className="row">
+                    
+                    <div className="col-de-12 text-center">
+                        <input type="submit" name="formcontact" value="Envoyer" className="btn btn-success" id="btn"/>
+                    </div>
+                </div>
+                </form>
+            </section>
+
+
+
 
         <footer className="footer">
         <div className="box-container">

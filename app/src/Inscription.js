@@ -35,33 +35,38 @@ const Register=(props)=>{
         }
         console.log(sendData);
 
-        // axios.post('http://localhost/test/test.php',sendData)
-        // .then((result)=>{
-        //     if(result.data.Status === 'Invalid') {
-        //    alert('Invalid User');
-        //      }
-        // else   { 
-        //     //props.history.push('/Dashboard')
-        //     //props.history.push('/Dashboard') Redirect
-        //     history('/dashboard');
-        // }
-                
-        // })
-
-        fetch( "http://localhost:80/test/test.php", {
+        fetch( "http://localhost:3000/inscription.php", {
             method : "POST",
             body : JSON.stringify(sendData),
-          }).then( function(response){
-            console.lot(response.status);
-            // if(response.status === 200){
-            //     history('/dashboard');
-            // }else{
-            //     alert('Invalid User');
-            // }
-               
+        }).then(function(response){
+            console.log(response.status);
+            if(response.status === 200){
+                console.log(sendData)
+                history('/inscription.php');
+            }else{
+                alert('Invalid User');
+            }
         }).catch(function(error){
             console.error(error);
         }) 
+    
+        // fetch( "http://localhost/test.php", {
+        //     method : "POST",
+        //     body : JSON.stringify(sendData),
+        //     accept: 'application/json',
+        //   }).then( function(response){
+        //     console.lot(response.status);
+        //     if(response.status === 200){
+        //         history('/dashboard');
+        //     }else{
+        //         alert('Invalid User');
+        //     }
+               
+        // }).catch(function(error){
+        //     console.error(error);
+        // }) 
+
+    
     
 
     }
@@ -90,7 +95,7 @@ const Register=(props)=>{
         </section>
 
         <section className="inscription_form">
-            <form onSubmit={submitForm} noValidate>
+            <form onSubmit={submitForm}>
                 <div className="row">
                     <div className="col-de-6"><input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" className="form-control" 
                         onChange={handleChange} value={data.pseudo} />
