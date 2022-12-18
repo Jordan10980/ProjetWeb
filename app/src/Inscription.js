@@ -1,182 +1,120 @@
-import { useState } from "react";
-import axios from 'axios';
-import{useNavigate} from "react-router-dom";
-import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import airplane from './image/airplane.png'
+import React, { useState } from 'react';
+import {BrowserRouter as Router, Routes, Route, Link, json } from 'react-router-dom';
 import './Inscription.css'
+import airplane from './image/airplane.png'
 
-const Register=(props)=>{
-
-    let history = useNavigate(); // Use for Navigate on Previous
-
-    const[data, setData]= useState({
-        pseudo:"",
-        mail:"",
-        mail2:"",
-        mdp:"",
-        mdp2:""
-
-    })
-
-    const handleChange=(e)=>{
-        setData({ ...data, [e.target.name]: e.target.value });
-
-        // pour voir les infos (nom, prenom, email, mdp --> console.log(data)
-    }
-
-    const submitForm=(e)=>{
-        e.preventDefault();
-        const sendData={
-            pseudo:data.pseudo,
-            mail:data.mail,
-            mail2:data.mail2,
-            mdp:data.mdp,
-            mdp2:data.mdp2
-        }
-        console.log(sendData);
-
-        fetch( "http://localhost:3000/inscription.php", {
-            method : "POST",
-            body : JSON.stringify(sendData),
-        }).then(function(response){
-            console.log(response.status);
-            if(response.status === 200){
-                console.log(sendData)
-                history('/inscription.php');
-            }else{
-                alert('Invalid User');
-            }
-        }).catch(function(error){
-            console.error(error);
-        }) 
+function Inscription() {
+    const [formData, setFormData] = useState({
+        pseudo: '',
+        mail: '',
+        mail2: '',
+        mdp: '',
+        mdp2: '',
+      });
     
-        // fetch( "http://localhost/test.php", {
-        //     method : "POST",
-        //     body : JSON.stringify(sendData),
-        //     accept: 'application/json',
-        //   }).then( function(response){
-        //     console.lot(response.status);
-        //     if(response.status === 200){
-        //         history('/dashboard');
-        //     }else{
-        //         alert('Invalid User');
-        //     }
-               
-        // }).catch(function(error){
-        //     console.error(error);
-        // }) 
-
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((formData) => ({ ...formData, [name]: value }));
+      };
     
+      const handleSubmit = (event) => {
+        event.preventDefault();
+
+        // send form data to server here
+        fetch("http://localhost/php/test.php", {
+          method: 'POST',
+          body: JSON.stringify({
+            data:formData}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then( function(response){
+        console.log(response.text());
+    }).catch(function(error){
+        console.error(error);
+    }) 
+      };
     
+  return (
+    <>
 
-    }
-    
-    return( 
-        <>
+    <header className="header">
 
-        <header className="header">
+        <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
-            <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
+        <nav className="navbar">
+            <Link to="/ProjetWeb" className="nav-link">Accueil</Link>
+            <Link to="/api" className="nav-link">Api</Link>
+            <Link to="/contact" className="nav-link">Contact</Link>
+            <Link to="/apropos" className="nav-link">A propos</Link>
+            <Link to="/connexion" className="nav-link">Se connecter</Link>
+        </nav>
 
-            <nav className="navbar">
-                <Link to="/ProjetWeb" className="nav-link">Accueil</Link>
-                <Link to="/api" className="nav-link">Api</Link>
-                <Link to="/contact" className="nav-link">Contact</Link>
-                <Link to="/apropos" className="nav-link">A propos</Link>
-                <Link to="/connexion" className="nav-link">Se connecter</Link>
-            </nav>
+        <div id="menu-btn" className="fas fa-bars"></div>
 
-            <div id="menu-btn" className="fas fa-bars"></div>
+    </header>
 
-            </header>
-
-        <section className="contain">
+    <section className="contain">
         <h3>Inscription</h3>
-        </section>
+    </section>
 
-        <section className="inscription_form">
-            <form onSubmit={submitForm}>
-                <div className="row">
-                    <div className="col-de-6"><input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" className="form-control" 
-                        onChange={handleChange} value={data.pseudo} />
-                    </div>
-                </div>
+    <section className="inscription_form">
 
-                <div className="row">
-                    <div className="col-de-6"><input type="email" placeholder="Votre mail" id="mail" name="mail" className="form-control"
-                        onChange={handleChange} value={data.mail} />
-                    </div>
-                </div>
+        <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" onChange={handleChange}/>
+        <br />
+            <input type="email" placeholder="Votre mail" id="mail" name="mail" onChange={handleChange} />
+        <br />
+            <input type="email" placeholder="Confirmez votre email" id="mail2" name="mail2" onChange={handleChange}/>
+        <br />
+            <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" onChange={handleChange} />
+        <br />
+            <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" onChange={handleChange} />
+        <br />
 
-                <div className="row">
-                    <div className="col-de-6"><input type="email" placeholder="Confirmez votre email" id="mail2" name="mail2" className="form-control"
-                    onChange={handleChange} value={data.mail2}/>
-                    </div>
-                </div>
+        <input type="submit" name="forminscription"  value="Je m'inscris"/>
 
-                <div className="row">
-                    <div className="col-de-6"><input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" className="form-control"
-                        onChange={handleChange} value={data.mdp}/>
-                    </div>
-                </div>
+        </form>
 
-                <div className="row">
-                    <div className="col-de-6"><input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" className="form-control"
-                        onChange={handleChange} value={data.mdp2}/>
-                    </div>
-                </div>
+    </section>
 
 
-                <div className="row">
-                    
-                    <div className="col-de-12 text-center">
-                        <input type="submit" name="forminscription" value="Je m'inscris " className="btn btn-success" id="btn"/>
-                    </div>
-                </div>
-                </form>
-            </section>
+    <footer className="footer">
+        <div className="box-container">
 
-       
+        <div className="box">
+        <h3>navigation</h3>
+        <Link to="/ProjetWeb" className="fas fa-arrow-right">Accueil</Link>
+        <Link to="/api" className="fas fa-arrow-right">Api</Link>
+        <Link to="/contact" className="fas fa-arrow-right">Contact</Link>
+        <Link to="/apropos" className="fas fa-arrow-right">A propos</Link>
+        <Link to="/connexion" className="fas fa-arrow-right">Se connecter</Link>
+        </div>
 
-        
-            <footer className="footer">
-                <div className="box-container">
-
-                <div className="box">
-                <h3>navigation</h3>
-                <Link to="/ProjetWeb" className="fas fa-arrow-right">Accueil</Link>
-                <Link to="/api" className="fas fa-arrow-right">Api</Link>
-                <Link to="/contact" className="fas fa-arrow-right">Contact</Link>
-                <Link to="/apropos" className="fas fa-arrow-right">A propos</Link>
-                <Link to="/connexion" className="fas fa-arrow-right">Se connecter</Link>
+            <div className="box">
+                <h3>Contact</h3>
+                <p> 01 02 03 04 05</p>
+                <p>143 avenue de Versaille, 75016 Paris</p>
+                <p>jms@voirdesavions.fr</p>
             </div>
 
-                    <div className="box">
-                        <h3>Contact</h3>
-                        <p> 01 02 03 04 05</p>
-                        <p>143 avenue de Versaille, 75016 Paris</p>
-                        <p>jms@voirdesavions.fr</p>
-                    </div>
+            <div className="box">
+                <h3>Suivez-nous</h3>
+                <a href="#"><i className="fab fa-linkedin-in"></i>linkedin</a>
+                <a href="#"><i className="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i className="fab fa-instagram"></i>instagram</a>
+                <a href="#"><i className="fab fa-twitter"></i>twitter</a>
+            </div>
+        </div>
+        <div className="log"><a href="#" className="logo"><img src={airplane} alt=""/></a></div>
+        <div className="credit">created by <span> Jordan | Sathusan | Mathis | </span></div>
 
-                    <div className="box">
-                        <h3>Suivez-nous</h3>
-                        <a href="#"><i className="fab fa-linkedin-in"></i>linkedin</a>
-                        <a href="#"><i className="fab fa-facebook-f"></i>facebook</a>
-                        <a href="#"><i className="fab fa-instagram"></i>instagram</a>
-                        <a href="#"><i className="fab fa-twitter"></i>twitter</a>
-                    </div>
-                </div>
-                <div className="log"><a href="#" className="logo"><img src={airplane} alt=""/></a></div>
-                <div className="credit">created by <span> Jordan | Sathusan | Mathis | </span></div>
-
-        </footer>
-       
-
+    </footer>
 
     <script src="Home.js"></script>
     </>
 
-    )
+  );
 }
 
-export default Register;
+export default Inscription;
