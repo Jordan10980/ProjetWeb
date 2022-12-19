@@ -109,7 +109,11 @@ input#btn:hover:before{
 
 .inscription_form{
     text-align: center;
-
+}
+.inscription_form p{
+    margin-top: 10px;
+    color: red;
+    font-size: 1.2rem;;
 }
 
 input{

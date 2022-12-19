@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route, Link, json } from 'react-router-dom';
 import './Inscription.css'
 import airplane from './image/airplane.png'
@@ -11,33 +11,40 @@ function Inscription() {
         mdp: '',
         mdp2: '',
       });
+      const [response, setResponse] = useState(null);
     
       const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((formData) => ({ ...formData, [name]: value }));
       };
-    
+
       const handleSubmit = (event) => {
         event.preventDefault();
-
+    
         // send form data to server here
         fetch("http://localhost/php/test.php", {
           method: 'POST',
           body: JSON.stringify({
-            data:formData}),
+            data: formData,
+          }),
           headers: {
             'Content-Type': 'application/json',
           },
-        }).then( function(response){
-        console.log(response.text());
-    }).catch(function(error){
-        console.error(error);
-    }) 
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            setResponse(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       };
     
+    
+
   return (
     <>
-
+    
     <header className="header">
 
         <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
@@ -58,9 +65,11 @@ function Inscription() {
         <h3>Inscription</h3>
     </section>
 
+    <div>
     <section className="inscription_form">
 
         <form onSubmit={handleSubmit}>
+            
             <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" onChange={handleChange}/>
         <br />
             <input type="email" placeholder="Votre mail" id="mail" name="mail" onChange={handleChange} />
@@ -75,8 +84,11 @@ function Inscription() {
         <input type="submit" name="forminscription"  value="Je m'inscris"/>
 
         </form>
+        
+        {response ? <p>{response}</p> : null}
 
     </section>
+    </div>
 
 
     <footer className="footer">
