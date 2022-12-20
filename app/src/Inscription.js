@@ -1,45 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, json } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate } from 'react-router-dom';
 import './Inscription.css'
 import airplane from './image/airplane.png'
 
-function Inscription() {
-    const [formData, setFormData] = useState({
-        pseudo: '',
-        mail: '',
-        mail2: '',
-        mdp: '',
-        mdp2: '',
-      });
-      const [response, setResponse] = useState(null);
-    
-      const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((formData) => ({ ...formData, [name]: value }));
-      };
 
-      const handleSubmit = (event) => {
-        event.preventDefault();
-    
-        // send form data to server here
-        fetch("http://localhost/php/test.php", {
-          method: 'POST',
-          body: JSON.stringify({
-            data: formData,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.text())
-          .then((data) => {
-            setResponse(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      };
-    
+function Inscription() {
+
+
+  const [formData, setFormData] = useState({
+    pseudo: '',
+    mail: '',
+    mail2: '',
+    mdp: '',
+    mdp2: '',
+  });
+  const [response, setResponse] = useState(null);
+  
+  const navigate = useNavigate();
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((formData) => ({ ...formData, [name]: value }));
+  };
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    // send form data to server here
+    fetch("http://localhost/php/test.php", {
+      method: 'POST',
+      body: JSON.stringify({
+        data: formData,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setResponse(data);
+        // if the data is correct, navigate to the new route
+        if (data === 'Bravo vous êtes inscrit') {
+          navigate('/connexion');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
     
 
   return (
