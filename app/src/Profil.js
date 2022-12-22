@@ -5,6 +5,15 @@ import './Profil.css'
 
 const Profil=()=>{
 
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        fetch('http://localhost/php/profil.php')
+        .then(response => response.json())
+        .then(responseData => setData(responseData));
+    }, []);
+
+
     return( 
     <>
 
@@ -29,6 +38,11 @@ const Profil=()=>{
     </section>
 
     <section className="profil">
+
+    <p>Name: {data.name}</p>
+    <p>Age: {data.age}</p>
+
+
         <Link to="/editionprofil" class="valid2">Editer mon profil</Link>
         <br />
         <br />

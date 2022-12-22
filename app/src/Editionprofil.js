@@ -5,6 +5,48 @@ import './Editionprofil.css'
 
 const Editionprofil=()=>{
 
+    const [formData, setFormData] = useState({
+        newpseudo: '',
+        newmail: '',
+        newmdp1: '',
+        newmdp2: '',
+      });
+      const [response, setResponse] = useState(null);
+      
+      const navigate = useNavigate();
+      
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((formData) => ({ ...formData, [name]: value }));
+      };
+      
+      const handleSubmit = (event) => {
+        event.preventDefault();
+      
+        // send form data to server here
+        fetch("http://localhost/php/editionprofil.php", {
+          method: 'POST',
+          body: JSON.stringify({
+            data: formData,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            setResponse(data);
+            // if the data is correct, navigate to the new route
+            if (data === 'édition réussi') {
+              navigate('/profil');
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
+    
+
     return( 
     <>
 
@@ -29,7 +71,24 @@ const Editionprofil=()=>{
     </section>
 
     <section className="edition_profil">
+        <form onSubmit={handleSubmit}>
+            
+            <input type="text" placeholder="Votre pseudo" name="newpseudo" onChange={handleChange}/>
+        <br />
+            <input type="email" placeholder="Votre mail" name="newmail" onChange={handleChange} />
+        <br />
+            <input type="password" placeholder="Votre mot de passe" name="newmdp1" onChange={handleChange} />
+        <br />
+            <input type="password" placeholder="Confirmez votre mdp" name="newmdp2" onChange={handleChange} />
+        <br />
+            <label>Avatar :</label>
+            <input type="file" id="avatar" name="avatar" /><br /><br />
+
+        <input type="submit" name="editprofil" id="btn1" value="Mettre à jour mon profil !"/>
+
+        </form>
         
+        {response ? <p>{response}</p> : null}
     </section>
 
 

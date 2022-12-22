@@ -1,0 +1,57 @@
+.edition_profil{
+    text-align: center;;
+}
+
+input{
+    height:40px;
+    width: 200px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    text-indent: 10px;
+}
+
+input#avatar{
+    height:40px;
+    width: 300px;
+    margin-top: 10px;
+    border-radius: 50px;
+    text-indent: 10px;
+    color: white;
+}
+
+/* Boutons */
+
+input#btn1{
+    height:40px;
+    width: 300px;
+    margin-top: 0.5rem;
+    display: inline-block;
+    padding: .8rem 3rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+    color:#fff;
+    background: var(--degrade);
+    border-radius: 2rem;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+input#btn1::before{
+    content:'';
+    position: absolute;
+    top:0; right:0;
+    height: 100%;
+    width: 0%;
+    background: var(--main-color);
+    z-index: -1;
+    transition: .2s ease-out;
+}
+
+
+input#btn1:hover:before{
+    left:0;
+    width:100%;
+}
