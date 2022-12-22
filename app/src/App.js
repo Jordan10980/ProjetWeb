@@ -9,6 +9,9 @@ import Contact from './Contact';
 import Apropos from './Apropos';
 import React, {useState, useEffect} from 'react';
 import {Radio} from "react-loader-spinner";
+import Editionprofil from './Editionprofil';
+import Profil from './Profil';
+import Sedeconnecter from './Sedeconnecter';
 
 
 function App() {
@@ -52,6 +55,9 @@ function App() {
         <Route path="/ProjetWeb" element={<Accueil/>}/>
         <Route path="/connexion" element={<Connexion/>}/>
         <Route path="/inscription" element={<Inscription/>}/>
+        <Route path="/editionprofil" element={<Editionprofil/>}/>
+        <Route path="/profil" element={<Profil/>}/>
+        <Route path="/sedeconnecter" element={<Sedeconnecter/>}/>
         <Route path="/api" element={<Api/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/apropos" element={<Apropos/>}/>

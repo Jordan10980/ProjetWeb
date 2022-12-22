@@ -42,7 +42,7 @@ function Inscription() {
         // if the data is correct, navigate to the new route
         if (data === 'Bravo vous êtes inscrit') {
           // navigate('/connexion');
-          setResponse(<p class="valid">Inscription réussie. Cliquez <Link to="/connexion" class="valid2">ici</Link> pour vous connecter.</p>);
+          setResponse(<p class="valid">Votre compte a bien été crée ! <Link to="/connexion" class="valid2">Me connecter</Link></p>);
         }
       })
       .catch((error) => {

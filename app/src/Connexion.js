@@ -37,7 +37,7 @@ const Connexion=()=>{
         setResponse(data);
         // if the data is correct, navigate to the new route
         if (data === 'Bravo vous êtes connecté !') {
-          // navigate('/connexion');
+          navigate('/profil');
           setResponse(<p class="valid">Connexion réussie. </p>);
         }
       })

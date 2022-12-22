@@ -1,0 +1,11 @@
+.valid2{
+    color: white;
+}
+
+.valid2:hover{
+    color: var(--main-color);
+}
+
+.profil{
+    text-align: center;
+}
