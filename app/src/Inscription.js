@@ -27,7 +27,7 @@ function Inscription() {
     event.preventDefault();
   
     // send form data to server here
-    fetch("http://localhost/php/test.php", {
+    fetch("http://localhost/php/inscription.php", {
       method: 'POST',
       body: JSON.stringify({
         data: formData,
@@ -91,7 +91,7 @@ function Inscription() {
             <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" onChange={handleChange} />
         <br />
 
-        <input type="submit" name="forminscription"  value="Je m'inscris"/>
+        <input type="submit" name="forminscription" id="btn" value="Je m'inscris"/>
 
         </form>
         

@@ -1,8 +1,52 @@
-import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import './Connexion.css'
 
 const Connexion=()=>{
+
+  const [formData, setFormData] = useState({
+    mailconnect: '',
+    mdpconnect: '',
+    rememberme: '',
+  });
+  const [response, setResponse] = useState(null);
+  
+  const navigate = useNavigate();
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((formData) => ({ ...formData, [name]: value }));
+  };
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    // send form data to server here
+    fetch("http://localhost/php/connexion.php", {
+      method: 'POST',
+      body: JSON.stringify({
+        data: formData,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setResponse(data);
+        // if the data is correct, navigate to the new route
+        if (data === 'Bravo vous êtes connecté !') {
+          // navigate('/connexion');
+          setResponse(<p class="valid">Connexion réussie. </p>);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
     return( 
     <>
 
@@ -26,19 +70,25 @@ const Connexion=()=>{
     <h3>Connexion</h3>
     </section>
 
-    <section className='connexion'>
-        <form method="POST" action="/Applications/XAMPP/xamppfiles/htdocs/test/connexion.php">
-                    <input type="email" name="mailconnect" placeholder="Mail" />
-                    <br /><br />
-                    <input type="password" name="mdpconnect" placeholder="Mot de passe" />
-                    <br /><br /> <br /><br />
-                    <input type="checkbox" name="rememberme" id="remembercheckbox" /><label for="remembercheckbox">Se souvenir de moi </label>
-                    <br /><br /> <br />
-                    <input type="submit" name="formconnexion" id='btn' value="Se connecter !" />
-                </form>
+    <section className="connexion">
+        <form onSubmit={handleSubmit}>
 
-                <Link to="/inscription" className="inscription">Je n'ai pas de compte</Link>
-                <br /><br /><br /><br /><br /><br /><br />
+            <input type="email" name="mailconnect" placeholder="Mail" onChange={handleChange}/>
+            <br /><br />
+            <input type="password" name="mdpconnect" placeholder="Mot de passe" onChange={handleChange}/>
+            <br /><br /> <br /><br />
+            <input type="checkbox" name="rememberme" id="remembercheckbox" onChange={handleChange}/><label for="remembercheckbox">Se souvenir de moi </label>
+            <br /><br /> <br />
+            <input type="submit" name="formconnexion" id='btn' value="Se connecter !"/>
+
+        </form>
+
+        {response ? <p>{response}</p> : null}
+        <br /><br />    
+
+            <Link to="/inscription" className="inscription">Je n'ai pas de compte</Link>
+            <br /><br /><br /><br /><br /><br /><br />
+
     </section>
 
 
