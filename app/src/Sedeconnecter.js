@@ -36,7 +36,7 @@ const Sedeconnecter=()=>{
     </header>
 
     <section className="contain">
-    <h3>Vous allez être redirigé <br />vers la <br /> page de contact.</h3>
+    <h3>Vous allez être redirigé <br />vers la <br /> page de connexion.</h3>
     </section>
 
     <footer className="footer">

@@ -1,19 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate, useLocation } from 'react-router-dom';
 import airplane from './image/airplane.png'
+
+
+
 import './Profil.css'
 
 const Profil=()=>{
 
+
     const [data, setData] = useState({});
+    const location = useLocation();
 
+    const params = new URLSearchParams(location.search);
 
-    useEffect(() => {
-        fetch('http://localhost/php/profil.php')
-        .then(response => response.json())
-        .then(responseData => setData(responseData));
-    }, []);
+    const [pseudo, setPseudo] = useState(null);
+    const [avatar, setAvatar] = useState(null);
+    const [mail, setMail] = useState(null);
+    const [pathimg, setPathImg] = useState(null);
 
+    const handleClick = () => {
+
+    fetch('http://localhost/php/profil.php', {
+        method: 'POST',
+        body: params
+      })
+        .then(response => response.text())
+        .then(data => {
+            const lines = data.split('\n');
+            setPseudo(lines[0])
+            setAvatar(lines[1])
+            setMail(lines[2])
+            setPathImg("./membres/avatars/"+String(lines[1]));
+            return (
+                <img src="./membres/avatars/default.jpeg" alt="My Image" />
+            )
+           
+            // console.log(lines[0]);
+
+          // Do something with the response from the PHP script
+        })
+        .catch(error => {
+          // Handle any errors that occurred during the request
+        });
+    };
+
+    
 
     return( 
     <>
@@ -35,18 +67,33 @@ const Profil=()=>{
     </header>
 
     <section className="contain">
-    <h3>Profil de </h3>
+    <h3>Profil de {pseudo}</h3>
     
   
     </section>
 
-    <section className="profil">
-        
-    <p>Name: {data.name}</p>
-    <p>Age: {data.age}</p>
-
     
 
+    <section className="profil">
+        
+   <div className='mail'>Mail : {mail}</div>
+   <div className='avatar'>Avatar : {avatar}</div>
+   <div className='avatar'>chemin : {pathimg}</div>
+
+   
+
+   <img src="./membres/avatars/default.jpeg" alt="My Image" />
+
+      
+      
+    
+
+   {/* /Users/jordandohou/ProjetWeb/app/membres/avatars/default.jpeg */}
+   <br />
+
+   {/* <img src={te} alt=""/> */}
+    
+    <button onClick={handleClick}>Send query parameters to PHP script</button>;
     
 
 
