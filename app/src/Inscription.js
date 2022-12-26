@@ -14,6 +14,7 @@ function Inscription() {
     mdp: '',
     mdp2: '',
   });
+  
   const [response, setResponse] = useState(null);
   
   const navigate = useNavigate();

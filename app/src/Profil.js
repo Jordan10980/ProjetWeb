@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate, useLocation } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import './Profil.css'
 
 const Profil=()=>{
 
     const [data, setData] = useState({});
+
+    const location = useLocation();
+    const { param1, param2 } = location.state;
 
     useEffect(() => {
         fetch('http://localhost/php/profil.php')
@@ -35,12 +38,20 @@ const Profil=()=>{
 
     <section className="contain">
     <h3>Profil de </h3>
+    
+  
     </section>
 
     <section className="profil">
-
+        
     <p>Name: {data.name}</p>
     <p>Age: {data.age}</p>
+
+    <p>Param1: {param1}</p>
+      <p>Param2: {param2}</p>
+    
+
+    
 
 
         <Link to="/editionprofil" class="valid2">Editer mon profil</Link>

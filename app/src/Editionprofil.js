@@ -73,11 +73,11 @@ const Editionprofil=()=>{
     <section className="edition_profil">
         <form onSubmit={handleSubmit}>
             
-            <input type="text" placeholder="Votre pseudo" name="newpseudo" onChange={handleChange}/>
+            <input type="text" placeholder="Nouveau pseudo" name="newpseudo" onChange={handleChange}/>
         <br />
-            <input type="email" placeholder="Votre mail" name="newmail" onChange={handleChange} />
+            <input type="email" placeholder="Nouveau mail" name="newmail" onChange={handleChange} />
         <br />
-            <input type="password" placeholder="Votre mot de passe" name="newmdp1" onChange={handleChange} />
+            <input type="password" placeholder="Nouveau mot de passe" name="newmdp1" onChange={handleChange} />
         <br />
             <input type="password" placeholder="Confirmez votre mdp" name="newmdp2" onChange={handleChange} />
         <br />

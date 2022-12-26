@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link, json } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import './Connexion.css'
+import { useNavigate } from '@reach/router';
 
 const Connexion=()=>{
 
@@ -36,9 +37,17 @@ const Connexion=()=>{
       .then((data) => {
         setResponse(data);
         // if the data is correct, navigate to the new route
-        if (data === 'Bravo vous êtes connecté !') {
-          navigate('/profil');
-          setResponse(<p class="valid">Connexion réussie. </p>);
+   
+        if (data.includes('Bravo vous êtes connecté !')) {
+  
+
+          const query = { param1: 'id=', param2: data.substring(26) };
+          const queryString = queryString.stringify(query);
+          navigate(`/profil?${queryString}`);
+
+          // navigate('/profil', {state: {param1: '?id=', param2: data.substring(26) }});
+          //const id = data.substring(26);
+          //console.log(id);
         }
       })
       .catch((error) => {

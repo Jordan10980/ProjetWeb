@@ -2,7 +2,7 @@
 echo "Votre mail a bien été envoyé";
 ?>
 
-<!doctype html>
+<!-- <!doctype html>
 
 <html>
 
@@ -58,4 +58,4 @@ echo "Votre mail a bien été envoyé";
 
 </body>
 
-</html>
+</html> -->
