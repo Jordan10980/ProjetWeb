@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, json } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link, json,useNavigate } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import './Connexion.css'
-import { useNavigate } from '@reach/router';
+// import { useNavigate } from '@reach/router';
 
 const Connexion=()=>{
 
@@ -37,13 +37,25 @@ const Connexion=()=>{
       .then((data) => {
         setResponse(data);
         // if the data is correct, navigate to the new route
-   
-        if (data.includes('Bravo vous êtes connecté !')) {
-  
+        
 
-          const query = { param1: 'id=', param2: data.substring(26) };
-          const queryString = queryString.stringify(query);
-          navigate(`/profil?${queryString}`);
+        if (data.includes('Bravo vous êtes connecté !')) {
+          const userId = data.substring(26);
+          // const query = { param1: 'id=', param2: data.substring(26) };
+          // const queryString = queryString.stringify(query);
+
+          // let queryString = '';
+
+          // function getQueryString() {
+          //   queryString = 'id='+id;
+          // }
+
+          // getQueryString();
+
+          // const query = { param1: 'id=', param2: data.substring(26) };
+          // navigate(`/profil?${queryString}`);
+
+          navigate(`/profil?id=${userId}`);
 
           // navigate('/profil', {state: {param1: '?id=', param2: data.substring(26) }});
           //const id = data.substring(26);

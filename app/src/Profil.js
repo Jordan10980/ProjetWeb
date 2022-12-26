@@ -7,8 +7,6 @@ const Profil=()=>{
 
     const [data, setData] = useState({});
 
-    const location = useLocation();
-    const { param1, param2 } = location.state;
 
     useEffect(() => {
         fetch('http://localhost/php/profil.php')
@@ -47,8 +45,6 @@ const Profil=()=>{
     <p>Name: {data.name}</p>
     <p>Age: {data.age}</p>
 
-    <p>Param1: {param1}</p>
-      <p>Param2: {param2}</p>
     
 
     
