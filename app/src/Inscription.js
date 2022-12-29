@@ -26,8 +26,6 @@ function Inscription() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-  
-    // send form data to server here
     fetch("http://localhost/php/inscription.php", {
       method: 'POST',
       body: JSON.stringify({
@@ -40,9 +38,7 @@ function Inscription() {
       .then((response) => response.text())
       .then((data) => {
         setResponse(data);
-        // if the data is correct, navigate to the new route
         if (data === 'Bravo vous êtes inscrit') {
-          // navigate('/connexion');
           setResponse(<p class="valid">Votre compte a bien été crée ! <Link to="/connexion" class="valid2">Me connecter</Link></p>);
         }
       })

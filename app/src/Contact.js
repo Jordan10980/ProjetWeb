@@ -31,7 +31,6 @@ function Contact() {
           .then(response => response.text())
           .then((data) => {
             setResponse(data);
-            // console.log('Success:', data);
           })
           .catch((error) => {
             console.error(error);

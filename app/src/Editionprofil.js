@@ -9,9 +9,6 @@ const Editionprofil=()=>{
   const [pseudo, setPseudo] = useState(window.myGlobalPseudo);
   const [mail, setMail] = useState(window.myGlobalMail);
 
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-
     const [formData, setFormData] = useState({
         id:window.myGlobalId,
         newpseudo: pseudo,
@@ -113,8 +110,6 @@ const Editionprofil=()=>{
         <br />
             <input type="password" placeholder="Confirmez votre mdp" name="newmdp2" onChange={handleChange} />
         <br /><br />
-            {/* <label>Avatar :</label>
-            <input type="file" id="avatar" name="avatar" onChange={handleChange}  /><br /><br /> */}
 
         <input type="submit" name="editprofil" id="btn1" value="Mettre à jour mon profil !"/>
 

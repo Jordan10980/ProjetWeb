@@ -7,7 +7,6 @@ import './Profil.css'
 
 const Profil=()=>{
 
-    const [data, setData] = useState({});
     const location = useLocation();
 
     const params = new URLSearchParams(location.search);
@@ -19,7 +18,6 @@ const Profil=()=>{
     const [pathimg, setPathImg] = useState(null);
 
     useEffect(() => {
-        // This will run as soon as the component renders
         handleClick();
       }, []); 
 
@@ -74,29 +72,11 @@ const Profil=()=>{
     
 
     <section className="profil">
-    {/* <img src={require('./membres/avatars/default.jpeg')} alt="Logo" /> */}
     <img src={pathimg} alt="Logo" />
     <div className='mail'>Pseudo : {pseudo}</div>
     <div className='mail'>Mail : {mail}</div>
-    {/* <div className='avatar'>Avatar : {avatar}</div> */}
-   {/* <div className='avatar'>chemin : {pathimg}</div> */}
-   {/* <div className='avatar'>Id : {id}</div> */}
 
-
-
-      
-      
-    
-
-   {/* /Users/jordandohou/ProjetWeb/app/membres/avatars/default.jpeg */}
-   <br />
-
-   {/* <img src={te} alt=""/> */}
-    
-    {/* <button onClick={handleClick}>Afficher mes informations personnelles</button>; */}
     <br /> <br /> <br /> <br />
-    
-
 
         <Link to={`/editionprofil?id=${id}`}class="valid2">
             Editer mon profil

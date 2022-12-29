@@ -29,8 +29,6 @@ function App() {
   return (
   <>
   
-    
-  
     {
     isLoading?
     <div className='loader'>
