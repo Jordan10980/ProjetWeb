@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate, useLocation } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import './Editionprofil.css'
 
+
 const Editionprofil=()=>{
 
+  const [pseudo, setPseudo] = useState(window.myGlobalPseudo);
+  const [mail, setMail] = useState(window.myGlobalMail);
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
     const [formData, setFormData] = useState({
-        newpseudo: '',
-        newmail: '',
+        id:window.myGlobalId,
+        newpseudo: pseudo,
+        newmail: mail,
         newmdp1: '',
         newmdp2: '',
       });
@@ -18,34 +26,56 @@ const Editionprofil=()=>{
       const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((formData) => ({ ...formData, [name]: value }));
+        if (name === "newpseudo") {
+            setPseudo(event.target.value);
+          }
+        if (name === "newmail") {
+          setMail(event.target.value);
+        }
       };
-      
+
       const handleSubmit = (event) => {
-        event.preventDefault();
-      
-        // send form data to server here
-        fetch("http://localhost/php/editionprofil.php", {
-          method: 'POST',
-          body: JSON.stringify({
-            data: formData,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((response) => response.text())
-          .then((data) => {
-            setResponse(data);
-            // if the data is correct, navigate to the new route
-            if (data === 'édition réussi') {
-              navigate('/profil');
-            }
+           event.preventDefault();
+
+           fetch("http://localhost/php/editionprofil.php", {
+            method: 'POST',
+            body: JSON.stringify({
+              data: formData,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
           })
-          .catch((error) => {
-            console.error(error);
-          });
+            .then((response) => response.text())
+            .then((data) => {
+              setResponse(data);
+
+              if (data.includes("Votre pseudo a bien été modifié\n")) {
+              // console.log(data);
+              setTimeout(() => {
+                navigate(`/profil?id=${window.myGlobalId}`);
+              }, 1300);
+            }
+            else if (data.includes("Votre adresse mail a bien été modifié\n")) {
+              // console.log(data);
+              setTimeout(() => {
+                navigate(`/profil?id=${window.myGlobalId}`);
+              }, 1300);
+            }
+            else if (data.includes("Votre mot de passe a bien été modfifié !\n")) {
+              // console.log(data);
+              setTimeout(() => {
+                navigate(`/profil?id=${window.myGlobalId}`);
+              }, 1300);
+            }else{
+              setResponse(data);
+              console.log(data);
+            }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
       };
-    
 
     return( 
     <>
@@ -67,28 +97,35 @@ const Editionprofil=()=>{
     </header>
 
     <section className="contain">
-    <h3>Edition du profil</h3>
+        <h3>Edition du profil</h3>
+        <p className='info'>!!! Vous aurez bientôt la possibilité de changer l'image de votre avatar !!!</p>
+        <br /><br />
     </section>
 
     <section className="edition_profil">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} enctype="multipart/form-data">
             
-            <input type="text" placeholder="Nouveau pseudo" name="newpseudo" onChange={handleChange}/>
+            <input type="text" placeholder="Nouveau pseudo" name="newpseudo" value={pseudo} onChange={handleChange} />
         <br />
-            <input type="email" placeholder="Nouveau mail" name="newmail" onChange={handleChange} />
+            <input type="email" placeholder="Nouveau mail" name="newmail" value={mail} onChange={handleChange}  />
         <br />
             <input type="password" placeholder="Nouveau mot de passe" name="newmdp1" onChange={handleChange} />
         <br />
             <input type="password" placeholder="Confirmez votre mdp" name="newmdp2" onChange={handleChange} />
-        <br />
-            <label>Avatar :</label>
-            <input type="file" id="avatar" name="avatar" /><br /><br />
+        <br /><br />
+            {/* <label>Avatar :</label>
+            <input type="file" id="avatar" name="avatar" onChange={handleChange}  /><br /><br /> */}
 
         <input type="submit" name="editprofil" id="btn1" value="Mettre à jour mon profil !"/>
 
         </form>
         
         {response ? <p>{response}</p> : null}
+
+        <br />
+        <br />
+
+
     </section>
 
 

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route, Link, json, useNavigate, useLocation } from 'react-router-dom';
 import airplane from './image/airplane.png'
-
-
-
 import './Profil.css'
 
-const Profil=()=>{
 
+
+const Profil=()=>{
 
     const [data, setData] = useState({});
     const location = useLocation();
@@ -17,7 +15,13 @@ const Profil=()=>{
     const [pseudo, setPseudo] = useState(null);
     const [avatar, setAvatar] = useState(null);
     const [mail, setMail] = useState(null);
+    const [id, setId] = useState(null);
     const [pathimg, setPathImg] = useState(null);
+
+    useEffect(() => {
+        // This will run as soon as the component renders
+        handleClick();
+      }, []); 
 
     const handleClick = () => {
 
@@ -29,19 +33,16 @@ const Profil=()=>{
         .then(data => {
             const lines = data.split('\n');
             setPseudo(lines[0])
+            window.myGlobalPseudo = lines[0];
             setAvatar(lines[1])
             setMail(lines[2])
-            setPathImg("./membres/avatars/"+String(lines[1]));
-            return (
-                <img src="./membres/avatars/default.jpeg" alt="My Image" />
-            )
-           
-            // console.log(lines[0]);
-
-          // Do something with the response from the PHP script
+            window.myGlobalMail = lines[2];
+            setId(lines[3])
+            window.myGlobalId = lines[3];
+            setPathImg(require("./membres/avatars/"+String(lines[1])));
+            window.myGlobalPath = pathimg;
         })
         .catch(error => {
-          // Handle any errors that occurred during the request
         });
     };
 
@@ -68,21 +69,20 @@ const Profil=()=>{
 
     <section className="contain">
     <h3>Profil de {pseudo}</h3>
-    
-  
     </section>
 
     
 
     <section className="profil">
-        
-   <div className='mail'>Mail : {mail}</div>
-   <div className='avatar'>Avatar : {avatar}</div>
-   <div className='avatar'>chemin : {pathimg}</div>
+    {/* <img src={require('./membres/avatars/default.jpeg')} alt="Logo" /> */}
+    <img src={pathimg} alt="Logo" />
+    <div className='mail'>Pseudo : {pseudo}</div>
+    <div className='mail'>Mail : {mail}</div>
+    {/* <div className='avatar'>Avatar : {avatar}</div> */}
+   {/* <div className='avatar'>chemin : {pathimg}</div> */}
+   {/* <div className='avatar'>Id : {id}</div> */}
 
-   
 
-   <img src="./membres/avatars/default.jpeg" alt="My Image" />
 
       
       
@@ -93,13 +93,15 @@ const Profil=()=>{
 
    {/* <img src={te} alt=""/> */}
     
-    <button onClick={handleClick}>Send query parameters to PHP script</button>;
+    {/* <button onClick={handleClick}>Afficher mes informations personnelles</button>; */}
+    <br /> <br /> <br /> <br />
     
 
 
-        <Link to="/editionprofil" class="valid2">Editer mon profil</Link>
-        <br />
-        <br />
+        <Link to={`/editionprofil?id=${id}`}class="valid2">
+            Editer mon profil
+        </Link> 
+        
         <Link to="/sedeconnecter" class="valid2">Se déconnecter</Link>
     </section>
 
