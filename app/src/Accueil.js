@@ -4,10 +4,18 @@ import image1 from './image/image1.jpeg'
 import avion from './image/avion.png'
 import airplane from './image/airplane.png'
 import './Accueil.css'
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {FaBars , FaTimes} from "react-icons/fa"
 
 const Accueil=()=>{
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+useEffect(() => {
+  if (window.myGlobalLogin === true) {
+    setIsLoggedIn(true);
+  }
+}, []);
 
     const navRef =useRef();
 
@@ -18,7 +26,39 @@ const Accueil=()=>{
     return( 
         <>
 
-        <header>
+
+<header>
+      <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
+
+      <nav ref={navRef }>
+        {/* Show different links based on the user's login status */}
+        {isLoggedIn ? (
+          <>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Carte</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to={`/profil?id=${window.myGlobalLoginId}`} class="nav-link">Mon profil</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Carte</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to="/connexion" class="nav-link">Se connecter</Link>
+          </>
+        )}
+        <button className='nav-btn nav-close-btn' onClick={showNavbar}> 
+            <FaTimes /> 
+        </button>
+      </nav>
+      <button className='nav-btn'  onClick={showNavbar} > 
+      <FaBars /> 
+      </button>
+    </header>
+
+        {/* <header>
 
         <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
@@ -36,7 +76,7 @@ const Accueil=()=>{
         <FaBars /> 
         </button>
 
-        </header>
+        </header> */}
         
 
         <section className="home" id="home">
@@ -56,6 +96,7 @@ const Accueil=()=>{
         </section>
        
         <section className="second">
+            <p>window.myGloballo</p>
             <h3>Bienvenue dans le suivi des vols en temps réel </h3>
             <p>Vous recherchez un avion ? Vous voulez savoir la position exacte d'un avion? Grâce à notre site web, accéder aux informations en temps réel de la position de l'avion sur la carte, le temps de trajet restant, le point de départ et d'arrivée,
                 et tant d'autres en 1 clic. </p>

@@ -2,10 +2,18 @@ import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import iut from './image/iut.jpeg'
 import './Apropos.css'
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {FaBars , FaTimes} from "react-icons/fa"
 
 const Apropos=()=>{
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+      if (window.myGlobalLogin === true) {
+        setIsLoggedIn(true);
+      }
+    }, []);
 
     const navRef =useRef();
 
@@ -14,7 +22,7 @@ const Apropos=()=>{
     }
     return( 
         <>
-
+{/* 
         <header>
 
         <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
@@ -33,7 +41,39 @@ const Apropos=()=>{
         <FaBars /> 
         </button>
 
-        </header>
+        </header> */}
+
+
+<header>
+      <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
+
+      <nav ref={navRef }>
+        {/* Show different links based on the user's login status */}
+        {isLoggedIn ? (
+          <>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Carte</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to={`/profil?id=${window.myGlobalLoginId}`} class="nav-link">Mon profil</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Carte</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to="/connexion" class="nav-link">Se connecter</Link>
+          </>
+        )}
+        <button className='nav-btn nav-close-btn' onClick={showNavbar}> 
+            <FaTimes /> 
+        </button>
+      </nav>
+      <button className='nav-btn'  onClick={showNavbar} > 
+      <FaBars /> 
+      </button>
+    </header>
 
         <section className="presite">
             <h3>A propos </h3>

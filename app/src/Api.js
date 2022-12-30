@@ -13,6 +13,15 @@ import RotatedMarker from 'leaflet-rotatedmarker';
 
 const Api=()=>{
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+      if (window.myGlobalLogin === true) {
+        setIsLoggedIn(true);
+      }
+    }, []);
+    
+
     const [planes, setPlanes] = useState([]);
     const [center] = useState([48.86411350753889, 2.328941978549886]);
     const planeIcon = new LE.Icon({
@@ -95,7 +104,40 @@ const Api=()=>{
     return( 
         <>
 
-        <header>
+
+
+<header>
+      <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
+
+      <nav ref={navRef }>
+        {/* Show different links based on the user's login status */}
+        {isLoggedIn ? (
+          <>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Carte</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to={`/profil?id=${window.myGlobalLoginId}`} class="nav-link">Mon profil</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Carte</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to="/connexion" class="nav-link">Se connecter</Link>
+          </>
+        )}
+        <button className='nav-btn nav-close-btn' onClick={showNavbar}> 
+            <FaTimes /> 
+        </button>
+      </nav>
+      <button className='nav-btn'  onClick={showNavbar} > 
+      <FaBars /> 
+      </button>
+    </header>
+    
+        {/* <header>
 
         <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
@@ -113,7 +155,7 @@ const Api=()=>{
         <FaBars /> 
         </button>
 
-        </header>
+        </header> */}
       
 
          <section className="contain">
@@ -123,8 +165,8 @@ const Api=()=>{
 
             <L.MapContainer
                 center={center}
-                zoom={6}
-                style={{ height: '65vh', width: '100wh' }} >
+                zoom={5}
+                style={{ height: '65vh', width: '100wh', }} >
                 <L.TileLayer
                     url="https://api.maptiler.com/maps/voyager-v2/{z}/{x}/{y}.png?key=cYHT2pYOApRNeD4phpPT"
                     attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'

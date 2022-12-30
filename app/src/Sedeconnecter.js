@@ -6,6 +6,7 @@ import {FaBars , FaTimes} from "react-icons/fa"
 
 const Sedeconnecter=()=>{
 
+
     const navRef =useRef();
 
     const showNavbar =  ()=>{
@@ -16,6 +17,7 @@ const Sedeconnecter=()=>{
 
     useEffect(() => {
         const interval = setInterval(() => {
+            window.myGlobalLogin = false
          navigate('/connexion');
         }, 1800);
     
