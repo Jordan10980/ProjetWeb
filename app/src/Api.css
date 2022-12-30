@@ -4,30 +4,13 @@ section{
     background-color: #101728;
 }
 
-/* bouton menu burger*/
-
-#menu-btn{
-    cursor: pointer;
-    font-size:  2.5rem;
-    padding: 1rem 1.3rem;
-    border-radius: .5rem;
-    color: var(--main-color);
-    background: var(--bg);
-    display: none;
-}
-
-#menu-btn:hover{
-    color: #fff;
-    background: var(--main-color);
-}
-
 
 /*header*/
 
-.header{
+header{
     position: fixed;
     top : 0; left :0; right :0;
-    z-index: 1000;
+    z-index: 1;
     background: var(--bg);
     box-shadow:  var(--box-shadow);
     display: flex;
@@ -36,27 +19,40 @@ section{
     padding: 2.5rem 9%;
 }
 
-.header .logo{
+
+header .logo{
     font-size: 2.5rem;
     color: #fff;
     font-weight: bolder;
 }
 
-.header .logo img{
-    width:5%;
+header .logo img{
+    width:6%;
     padding-right: 1rem;
 }
 
-.header .navbar a{
+
+nav a{
     font-size: 1.7rem;
     color: white;
     margin-left: 2rem;
-}
+ }
 
-.header .navbar a:hover{
+ nav a:hover{
     color:var(--main-color);
-    
-}
+ }
+
+ header .nav-btn{
+    padding: 5px; 
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--main-color);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1.8rem; 
+ }
 
 /*contenu*/
 
@@ -141,6 +137,9 @@ section{
 }
 
 
+/* responsive*/
+
+
 @media (max-width:1116px){
 
     html{
@@ -154,45 +153,11 @@ section{
     section{
         padding: 2rem;
     }
-
-
-}
-
-@media (max-width:943px){
-
-    #menu-btn{
-        display: initial;
+    
+    .btn{
+        margin-bottom: 5rem;
     }
 
-    .header .navbar{
-        position: absolute;
-        top: 115%; right: 2rem;
-        background:var(--bg);
-        box-shadow: var(--box-shadow);
-        border: var(--border);
-        border-radius:  .5rem;
-        width: 40rem;
-        transform: scale(0);
-        transform-origin: top right;
-        opacity: 0;
-    }
-
-    .header .navbar.active{
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    .header .navbar a{
-        font-size: 2rem;
-        display: block;
-        padding: 1rem;
-        margin: 1rem;
-        border-radius: .5rem;
-    }
-
-    .header .navbar a:hover{
-        background: var(--bg);
-    }
 
 }
 
@@ -205,4 +170,56 @@ section{
         width: 300px;
         height: 300px;
     }
-}
+}  
+
+@media only screen and (max-width: 1024px ){
+    header .nav-btn{
+        visibility: visible;
+        opacity: 1;
+    }
+
+    header nav{
+        position: fixed;
+        top : 0; 
+        left: 0; 
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column ;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background-color: var(--bg);
+        transition: 1s;
+        transform: translateY(-100vh);
+    }
+
+    header .responsive_nav{
+         transform: none;
+    }
+
+    nav .nav-close-btn{
+        position:absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    nav a{
+        font-size: 1.5rem; 
+    }
+
+    .home .content{
+        text-align: center;
+    }
+
+    .third{
+        flex-direction: column;
+        
+    }
+
+    .fourth{
+        flex-direction: column;
+    }
+
+
+ }

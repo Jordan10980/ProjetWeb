@@ -4,30 +4,40 @@ import image1 from './image/image1.jpeg'
 import avion from './image/avion.png'
 import airplane from './image/airplane.png'
 import './Accueil.css'
+import React, { useEffect, useRef } from 'react';
+import {FaBars , FaTimes} from "react-icons/fa"
 
 const Accueil=()=>{
 
+    const navRef =useRef();
+
+    const showNavbar =  ()=>{
+        navRef.current.classList.toggle("responsive_nav"); 
+    }
 
     return( 
         <>
 
-        <header class="header">
+        <header>
 
-            <a href="" class="logo"><img src={airplane} alt=""/>Flight Tracker</a>
+        <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
-            <nav class="navbar">
-                <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
-                <Link to="/api" class="nav-link">Api</Link>
-                <Link to="/contact" class="nav-link">Contact</Link>
-                <Link to="/apropos" class="nav-link">A propos</Link>
-                <Link to="/connexion" class="nav-link">Se connecter</Link>
-            </nav>
+        <nav ref={navRef }>
+            <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+            <Link to="/api" class="nav-link">Api</Link>
+            <Link to="/contact" class="nav-link">Contact</Link>
+            <Link to="/apropos" class="nav-link">A propos</Link>
+            <Link to="/connexion" class="nav-link">Se connecter</Link>
+            <button className='nav-btn nav-close-btn' onClick={showNavbar}> 
+                <FaTimes /> 
+            </button>
+        </nav>
+        <button className='nav-btn'  onClick={showNavbar} > 
+        <FaBars /> 
+        </button>
 
-            <div id="menu-btn" class="fas fa-bars"></div>
-        
         </header>
-
-
+        
 
         <section className="home" id="home">
             <a href="#"/>

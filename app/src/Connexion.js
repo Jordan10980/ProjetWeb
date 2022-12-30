@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {BrowserRouter as Router, Routes, Route, Link, json,useNavigate } from 'react-router-dom';
 import airplane from './image/airplane.png'
 import './Connexion.css'
+import {FaBars , FaTimes} from "react-icons/fa"
 
 const Connexion=()=>{
+
+  const navRef =useRef();
+
+  const showNavbar =  ()=>{
+      navRef.current.classList.toggle("responsive_nav"); 
+  }
 
   const [formData, setFormData] = useState({
     mailconnect: '',
@@ -47,20 +54,22 @@ const Connexion=()=>{
 
     return( 
     <>
+    <header>
+    <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
 
-    <header className="header">
-
-        <a href="" className="logo"><img src={airplane} alt=""/>Flight Tracker</a>
-
-        <nav className="navbar">
-            <Link to="/ProjetWeb" className="nav-link">Accueil</Link>
-            <Link to="/api" className="nav-link">Api</Link>
-            <Link to="/contact" className="nav-link">Contact</Link>
-            <Link to="/apropos" className="nav-link">A propos</Link>
-            <Link to="/connexion" className="nav-link">Se connecter</Link>
-        </nav>
-
-        <div id="menu-btn" className="fas fa-bars"></div>
+    <nav ref={navRef }>
+        <Link to="/ProjetWeb" class="nav-link">Accueil</Link>
+        <Link to="/api" class="nav-link">Api</Link>
+        <Link to="/contact" class="nav-link">Contact</Link>
+        <Link to="/apropos" class="nav-link">A propos</Link>
+        <Link to="/connexion" class="nav-link">Se connecter</Link>
+        <button className='nav-btn nav-close-btn' onClick={showNavbar}> 
+            <FaTimes /> 
+        </button>
+    </nav>
+    <button className='nav-btn'  onClick={showNavbar} > 
+    <FaBars /> 
+    </button>
 
     </header>
 
